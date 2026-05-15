@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The IRL Bit 🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --electric: #FF2D55;
+    --neon: #FFE600;
+    --acid: #00FF87;
+    --deep: #0A0A0F;
+    --dark: #12121A;
+    --card: #1A1A26;
+    --text: #FFFFFF;
+    --muted: rgba(255,255,255,0.5);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–deep);
+color: var(–text);
+font-family: ‘Space Grotesk’, sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+position: relative;
+}
+
+/* Animated background */
+body::before {
+content: ‘’;
+position: fixed;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background:
+radial-gradient(ellipse at 20% 20%, rgba(255,45,85,0.15) 0%, transparent 50%),
+radial-gradient(ellipse at 80% 80%, rgba(0,255,135,0.1) 0%, transparent 50%),
+radial-gradient(ellipse at 50% 50%, rgba(255,230,0,0.05) 0%, transparent 70%);
+animation: bgPulse 8s ease-in-out infinite alternate;
+pointer-events: none;
+z-index: 0;
+}
+
+@keyframes bgPulse {
+0% { transform: scale(1) rotate(0deg); }
+100% { transform: scale(1.1) rotate(3deg); }
+}
+
+.screen {
+display: none;
+min-height: 100vh;
+position: relative;
+z-index: 1;
+animation: fadeIn 0.4s ease;
+}
+
+.screen.active { display: flex; flex-direction: column; }
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== HOME SCREEN ========== */
+#home {
+align-items: center;
+justify-content: center;
+padding: 40px 24px;
+text-align: center;
+gap: 0;
+}
+
+.logo-area {
+margin-bottom: 8px;
+animation: logoIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes logoIn {
+from { opacity: 0; transform: scale(0.5) rotate(-5deg); }
+to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.logo-tag {
+font-size: 11px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–neon);
+font-weight: 600;
+margin-bottom: 4px;
+}
+
+.logo-main {
+font-family: ‘Bebas Neue’, cursive;
+font-size: clamp(72px, 18vw, 120px);
+line-height: 0.85;
+background: linear-gradient(135deg, #FF2D55 0%, #FFE600 50%, #FF2D55 100%);
+background-size: 200% auto;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+animation: shimmer 3s linear infinite;
+filter: drop-shadow(0 0 30px rgba(255,45,85,0.5));
+}
+
+@keyframes shimmer {
+to { background-position: 200% center; }
+}
+
+.logo-sub {
+font-family: ‘Permanent Marker’, cursive;
+font-size: clamp(16px, 4vw, 22px);
+color: var(–acid);
+margin-top: 4px;
+letter-spacing: 1px;
+}
+
+.home-tagline {
+font-size: clamp(14px, 3.5vw, 17px);
+color: var(–muted);
+margin: 20px 0 32px;
+line-height: 1.6;
+max-width: 320px;
+animation: fadeIn 0.8s ease 0.3s both;
+}
+
+.home-tagline span {
+color: var(–neon);
+font-weight: 700;
+}
+
+/* Vibe question */
+.vibe-question {
+font-family: ‘Bebas Neue’, cursive;
+font-size: clamp(28px, 7vw, 42px);
+letter-spacing: 2px;
+margin-bottom: 24px;
+animation: fadeIn 0.8s ease 0.4s both;
+}
+
+/* Vibe Cards */
+.vibe-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+width: 100%;
+max-width: 420px;
+animation: fadeIn 0.8s ease 0.5s both;
+}
+
+.vibe-card {
+background: var(–card);
+border-radius: 20px;
+padding: 20px 16px;
+cursor: pointer;
+transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+border: 2px solid rgba(255,255,255,0.06);
+position: relative;
+overflow: hidden;
+text-align: center;
+-webkit-tap-highlight-color: transparent;
+}
+
+.vibe-card::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+opacity: 0;
+transition: opacity 0.3s;
+border-radius: 18px;
+}
+
+.vibe-card:active {
+transform: scale(0.93);
+}
+
+.vibe-card:hover {
+transform: scale(1.04) translateY(-2px);
+border-color: rgba(255,255,255,0.2);
+}
+
+/* Individual vibe card colors */
+.vibe-card.lets-go { –vibe-color: #FF2D55; }
+.vibe-card.lets-go::before { background: radial-gradient(circle at center, rgba(255,45,85,0.3), transparent); }
+.vibe-card.lets-go:hover::before { opacity: 1; }
+.vibe-card.lets-go .vibe-emoji { animation: shake 0.5s ease infinite alternate; }
+
+.vibe-card.chill { –vibe-color: #7B61FF; }
+.vibe-card.chill::before { background: radial-gradient(circle at center, rgba(123,97,255,0.3), transparent); }
+.vibe-card.chill:hover::before { opacity: 1; }
+.vibe-card.chill .vibe-emoji { animation: float 3s ease-in-out infinite; }
+
+.vibe-card.party { –vibe-color: #FFE600; }
+.vibe-card.party::before { background: radial-gradient(circle at center, rgba(255,230,0,0.3), transparent); }
+.vibe-card.party:hover::before { opacity: 1; }
+.vibe-card.party .vibe-emoji { animation: spin 2s linear infinite; }
+
+.vibe-card.just-us { –vibe-color: #FF6B9D; }
+.vibe-card.just-us::before { background: radial-gradient(circle at center, rgba(255,107,157,0.3), transparent); }
+.vibe-card.just-us:hover::before { opacity: 1; }
+.vibe-card.just-us .vibe-emoji { animation: heartbeat 1s ease-in-out infinite; }
+
+.vibe-card.lovebugs { –vibe-color: #00FF87; }
+.vibe-card.lovebugs::before { background: radial-gradient(circle at center, rgba(0,255,135,0.3), transparent); }
+.vibe-card.lovebugs:hover::before { opacity: 1; }
+.vibe-card.lovebugs .vibe-emoji { animation: bounce 0.6s ease-in-out infinite alternate; }
+
+.vibe-card.wildcard { –vibe-color: #FF9500; }
+.vibe-card.wildcard::before { background: radial-gradient(circle at center, rgba(255,149,0,0.3), transparent); }
+.vibe-card.wildcard:hover::before { opacity: 1; }
+.vibe-card.wildcard .vibe-emoji { animation: wobble 1s ease-in-out infinite; }
+
+@keyframes shake {
+from { transform: rotate(-8deg); }
+to { transform: rotate(8deg); }
+}
+@keyframes float {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-8px); }
+}
+@keyframes spin {
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
+}
+@keyframes heartbeat {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.2); }
+}
+@keyframes bounce {
+from { transform: translateY(0); }
+to { transform: translateY(-10px); }
+}
+@keyframes wobble {
+0%, 100% { transform: rotate(0deg); }
+25% { transform: rotate(-10deg); }
+75% { transform: rotate(10deg); }
+}
+
+.vibe-emoji {
+font-size: 36px;
+display: block;
+margin-bottom: 8px;
+}
+
+.vibe-name {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 18px;
+letter-spacing: 1px;
+color: var(–vibe-color, white);
+display: block;
+margin-bottom: 4px;
+}
+
+.vibe-desc {
+font-size: 11px;
+color: var(–muted);
+line-height: 1.3;
+}
+
+/* Full width card for lovebugs + wildcard row */
+.vibe-grid .full-width {
+grid-column: 1 / -1;
+}
+
+/* ========== CHALLENGE SCREEN ========== */
+#challenge {
+padding: 0;
+justify-content: space-between;
+min-height: 100vh;
+}
+
+.challenge-header {
+padding: 24px 24px 0;
+display: flex;
+align-items: center;
+justify-content: space-between;
+animation: fadeIn 0.4s ease;
+}
+
+.back-btn {
+background: rgba(255,255,255,0.1);
+border: none;
+color: white;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+font-size: 18px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.2s;
+-webkit-tap-highlight-color: transparent;
+}
+
+.back-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+
+.vibe-pill {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 14px;
+letter-spacing: 2px;
+padding: 6px 16px;
+border-radius: 20px;
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(255,255,255,0.15);
+}
+
+.challenge-count {
+font-size: 13px;
+color: var(–muted);
+font-weight: 600;
+}
+
+/* Main challenge card */
+.challenge-main {
+flex: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 24px;
+text-align: center;
+}
+
+.challenge-card {
+background: var(–card);
+border-radius: 28px;
+padding: 36px 28px;
+width: 100%;
+max-width: 420px;
+border: 2px solid rgba(255,255,255,0.08);
+position: relative;
+overflow: hidden;
+animation: cardIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes cardIn {
+from { opacity: 0; transform: scale(0.8) rotate(-3deg); }
+to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.challenge-card::before {
+content: ‘’;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 4px;
+background: var(–current-color, var(–electric));
+border-radius: 28px 28px 0 0;
+}
+
+.challenge-category-tag {
+display: inline-block;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–current-color, var(–electric));
+margin-bottom: 20px;
+padding: 4px 12px;
+background: rgba(255,255,255,0.06);
+border-radius: 20px;
+}
+
+.challenge-emoji-big {
+font-size: 64px;
+margin-bottom: 20px;
+display: block;
+animation: emojiPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes emojiPop {
+from { transform: scale(0); }
+to { transform: scale(1); }
+}
+
+.challenge-title {
+font-family: ‘Bebas Neue’, cursive;
+font-size: clamp(32px, 8vw, 48px);
+letter-spacing: 2px;
+margin-bottom: 16px;
+line-height: 1;
+color: white;
+}
+
+.challenge-description {
+font-size: clamp(15px, 3.5vw, 17px);
+line-height: 1.6;
+color: rgba(255,255,255,0.8);
+margin-bottom: 24px;
+}
+
+/* Warning box */
+.warning-box {
+background: rgba(255,230,0,0.08);
+border: 1px solid rgba(255,230,0,0.2);
+border-radius: 12px;
+padding: 12px 16px;
+font-size: 12px;
+color: rgba(255,230,0,0.8);
+text-align: left;
+display: flex;
+gap: 8px;
+align-items: flex-start;
+margin-bottom: 8px;
+}
+
+.warning-icon { flex-shrink: 0; font-size: 14px; }
+
+/* Hype message */
+.hype-message {
+font-family: ‘Permanent Marker’, cursive;
+font-size: clamp(14px, 3.5vw, 18px);
+color: var(–acid);
+margin-bottom: 24px;
+min-height: 28px;
+animation: fadeIn 0.5s ease;
+}
+
+/* Bottom actions */
+.challenge-actions {
+padding: 0 24px 40px;
+display: flex;
+flex-direction: column;
+gap: 12px;
+width: 100%;
+max-width: 420px;
+margin: 0 auto;
+animation: fadeIn 0.4s ease 0.3s both;
+}
+
+.btn-next {
+background: var(–current-color, var(–electric));
+color: white;
+border: none;
+border-radius: 18px;
+padding: 18px;
+font-family: ‘Bebas Neue’, cursive;
+font-size: 22px;
+letter-spacing: 2px;
+cursor: pointer;
+transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+-webkit-tap-highlight-color: transparent;
+box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.btn-next:hover { transform: scale(1.03) translateY(-2px); filter: brightness(1.1); }
+.btn-next:active { transform: scale(0.97); }
+
+.btn-home {
+background: transparent;
+color: var(–muted);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 18px;
+padding: 14px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+-webkit-tap-highlight-color: transparent;
+letter-spacing: 1px;
+}
+
+.btn-home:hover { color: white; border-color: rgba(255,255,255,0.3); }
+
+/* ========== CELEBRATION SCREEN ========== */
+#celebration {
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 40px 24px;
+gap: 20px;
+}
+
+.celebration-emoji {
+font-size: 80px;
+animation: emojiPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.celebration-title {
+font-family: ‘Bebas Neue’, cursive;
+font-size: clamp(48px, 12vw, 72px);
+background: linear-gradient(135deg, var(–neon), var(–acid));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+line-height: 1;
+animation: fadeIn 0.5s ease 0.2s both;
+}
+
+.celebration-sub {
+font-family: ‘Permanent Marker’, cursive;
+font-size: clamp(18px, 4vw, 24px);
+color: var(–electric);
+animation: fadeIn 0.5s ease 0.3s both;
+}
+
+.celebration-count {
+background: var(–card);
+border-radius: 20px;
+padding: 20px 32px;
+animation: fadeIn 0.5s ease 0.4s both;
+}
+
+.celebration-count .big-num {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 64px;
+color: var(–neon);
+line-height: 1;
+}
+
+.celebration-count .label {
+font-size: 13px;
+color: var(–muted);
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+
+.celebration-message {
+font-size: 16px;
+color: rgba(255,255,255,0.7);
+line-height: 1.6;
+max-width: 300px;
+animation: fadeIn 0.5s ease 0.5s both;
+}
+
+.btn-keep-going {
+background: linear-gradient(135deg, var(–electric), #FF6B9D);
+color: white;
+border: none;
+border-radius: 18px;
+padding: 20px 40px;
+font-family: ‘Bebas Neue’, cursive;
+font-size: 24px;
+letter-spacing: 2px;
+cursor: pointer;
+transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+animation: fadeIn 0.5s ease 0.6s both;
+box-shadow: 0 8px 32px rgba(255,45,85,0.4);
+width: 100%;
+max-width: 340px;
+-webkit-tap-highlight-color: transparent;
+}
+
+.btn-keep-going:hover { transform: scale(1.04) translateY(-3px); filter: brightness(1.1); }
+.btn-keep-going:active { transform: scale(0.97); }
+
+.btn-change-vibe {
+background: transparent;
+color: var(–muted);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 18px;
+padding: 14px 32px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+width: 100%;
+max-width: 340px;
+-webkit-tap-highlight-color: transparent;
+letter-spacing: 1px;
+}
+
+.btn-change-vibe:hover { color: white; border-color: rgba(255,255,255,0.3); }
+
+/* Confetti */
+.confetti-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 999;
+}
+
+.confetti-piece {
+position: absolute;
+width: 10px;
+height: 10px;
+top: -20px;
+animation: confettiFall linear forwards;
+border-radius: 2px;
+}
+
+@keyframes confettiFall {
+to {
+transform: translateY(110vh) rotate(720deg);
+opacity: 0;
+}
+}
+
+/* Noise texture overlay */
+body::after {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.03’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 100;
+opacity: 0.4;
+}
+
+/* Scrollable if needed */
+#home { overflow-y: auto; padding-bottom: 48px; }
+
+/* ========== SPLASH SCREEN ========== */
+#splash {
+align-items: center;
+justify-content: center;
+padding: 24px 20px;
+height: 100vh;
+overflow: hidden;
+}
+
+.splash-inner {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 16px;
+width: 100%;
+max-width: 420px;
+height: 100%;
+text-align: center;
+}
+
+.splash-logo {
+animation: logoIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.splash-pre {
+font-size: 11px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 2px;
+}
+
+.splash-title {
+font-family: ‘Bebas Neue’, cursive;
+font-size: clamp(44px, 12vw, 72px);
+line-height: 0.85;
+background: linear-gradient(135deg, #FF2D55 0%, #FFE600 50%, #FF2D55 100%);
+background-size: 200% auto;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+animation: shimmer 3s linear infinite;
+filter: drop-shadow(0 0 20px rgba(255,45,85,0.5));
+}
+
+/* Definition cards */
+.definitions {
+display: flex;
+flex-direction: column;
+gap: 8px;
+width: 100%;
+animation: fadeIn 0.8s ease 0.3s both;
+}
+
+.def-card {
+background: var(–card);
+border-radius: 14px;
+padding: 12px 14px;
+text-align: left;
+border: 1px solid rgba(255,255,255,0.06);
+position: relative;
+overflow: hidden;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.def-card::before {
+content: ‘’;
+position: absolute;
+top: 0;
+left: 0;
+width: 3px;
+height: 100%;
+background: var(–electric);
+border-radius: 3px 0 0 3px;
+}
+
+.def-card:nth-child(2)::before { background: var(–acid); }
+.def-card:nth-child(3)::before {
+background: linear-gradient(180deg, #FF2D55, #FFE600, #00FF87);
+}
+
+.def-card-full {
+background: linear-gradient(135deg, rgba(255,45,85,0.1), rgba(255,230,0,0.08));
+border-color: rgba(255,45,85,0.2);
+}
+
+.def-left {
+flex-shrink: 0;
+min-width: 52px;
+}
+
+.def-word {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 20px;
+letter-spacing: 1px;
+display: block;
+line-height: 1;
+}
+
+.def-card:nth-child(1) .def-word { color: var(–electric); }
+.def-card:nth-child(2) .def-word { color: var(–acid); }
+.def-card:nth-child(3) .def-word {
+background: linear-gradient(135deg, #FF2D55, #FFE600);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+font-size: 16px;
+}
+
+.def-phonetic {
+font-size: 10px;
+color: var(–muted);
+font-style: italic;
+display: block;
+line-height: 1.2;
+}
+
+.def-right { flex: 1; }
+
+.def-type {
+font-size: 10px;
+color: var(–muted);
+letter-spacing: 1px;
+text-transform: uppercase;
+display: block;
+margin-bottom: 3px;
+}
+
+.def-meaning {
+font-size: 13px;
+line-height: 1.4;
+color: rgba(255,255,255,0.75);
+}
+
+.def-highlight {
+color: white;
+font-weight: 700;
+}
+
+/* Splash CTA button */
+.btn-splash {
+background: linear-gradient(135deg, var(–electric), #FF6B9D);
+color: white;
+border: none;
+border-radius: 16px;
+padding: 16px 40px;
+font-family: ‘Bebas Neue’, cursive;
+font-size: 22px;
+letter-spacing: 2px;
+cursor: pointer;
+transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+box-shadow: 0 8px 32px rgba(255,45,85,0.4);
+width: 100%;
+-webkit-tap-highlight-color: transparent;
+animation: fadeIn 0.8s ease 0.6s both;
+}
+
+.btn-splash:hover { transform: scale(1.04) translateY(-3px); filter: brightness(1.1); }
+.btn-splash:active { transform: scale(0.97); }
+
+.splash-footer {
+font-size: 11px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–muted);
+animation: fadeIn 0.8s ease 0.8s both;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ========== SPLASH SCREEN ========== -->
+
+<div class="screen active" id="splash">
+  <div class="splash-inner">
+
+```
+<div class="splash-logo">
+  <p class="splash-pre">welcome to</p>
+  <h1 class="splash-title">THE IRL BIT</h1>
+</div>
+
+<div class="definitions">
+
+  <div class="def-card">
+    <div class="def-left">
+      <span class="def-word">IRL</span>
+      <span class="def-phonetic">/aɪ ɑːr ɛl/</span>
+    </div>
+    <div class="def-right">
+      <span class="def-type">abbreviation</span>
+      <p class="def-meaning"><span class="def-highlight">in real life</span> — that magical thing that happens when you put the phone down 😏</p>
+    </div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-left">
+      <span class="def-word">Bit</span>
+      <span class="def-phonetic">/bɪt/</span>
+    </div>
+    <div class="def-right">
+      <span class="def-type">noun, slang</span>
+      <p class="def-meaning">a <span class="def-highlight">moment so good</span> the whole room absolutely loses it 🤣</p>
+    </div>
+  </div>
+
+  <div class="def-card def-card-full">
+    <div class="def-left">
+      <span class="def-word">The IRL Bit</span>
+    </div>
+    <div class="def-right">
+      <span class="def-type">noun, legendary</span>
+      <p class="def-meaning"><span class="def-highlight">bringing your best moments from the screen into your room</span> — one bit at a time ⚡</p>
+    </div>
+  </div>
+
+</div>
+
+<button class="btn-splash" onclick="startApp()">
+  LET'S GET INTO IT 🔥
+</button>
+
+<p class="splash-footer">real games · real laughs · real memories</p>
+```
+
+  </div>
+</div>
+
+<!-- ========== HOME SCREEN ========== -->
+
+<div class="screen" id="home">
+  <div class="logo-area">
+    <p class="logo-tag">⚡ The Original</p>
+    <h1 class="logo-main">THE<br>IRL BIT</h1>
+    <p class="logo-sub">real games. real laughs. real memories.</p>
+  </div>
+
+  <p class="home-tagline">
+    Drop the phones. <span>Pick up the vibes.</span><br>
+    The party challenge app that makes every moment unforgettable.
+  </p>
+
+  <h2 class="vibe-question">WHAT'S THE VIBE TONIGHT?</h2>
+
+  <div class="vibe-grid">
+    <div class="vibe-card lets-go" onclick="selectVibe('lets-go', 'LETS GO', '⚡', '#FF2D55')">
+      <span class="vibe-emoji">⚡</span>
+      <span class="vibe-name">LET'S GO</span>
+      <span class="vibe-desc">High energy, competitive, absolute chaos</span>
+    </div>
+
+```
+<div class="vibe-card chill" onclick="selectVibe('chill', 'CHILL MODE', '🌙', '#7B61FF')">
+  <span class="vibe-emoji">🌙</span>
+  <span class="vibe-name">CHILL MODE</span>
+  <span class="vibe-desc">Cosy, get-to-know-you, good convos</span>
+</div>
+
+<div class="vibe-card party" onclick="selectVibe('party', 'PARTY TIME', '🎉', '#FFE600')">
+  <span class="vibe-emoji">🎉</span>
+  <span class="vibe-name">PARTY TIME</span>
+  <span class="vibe-desc">Big group, big energy, big memories</span>
+</div>
+
+<div class="vibe-card just-us" onclick="selectVibe('just-us', 'JUST US', '🤜🤛', '#FF6B9D')">
+  <span class="vibe-emoji">🤜🤛</span>
+  <span class="vibe-name">JUST US</span>
+  <span class="vibe-desc">Besties, siblings, roomies, any two humans!</span>
+</div>
+
+<div class="vibe-card lovebugs" onclick="selectVibe('lovebugs', 'LITTLE LOVEBUGS', '🧸', '#00FF87')">
+  <span class="vibe-emoji">🧸</span>
+  <span class="vibe-name">LITTLE LOVEBUGS</span>
+  <span class="vibe-desc">Kid-friendly fun for the little ones</span>
+</div>
+
+<div class="vibe-card wildcard" onclick="selectVibe('wildcard', 'WILDCARD', '🎲', '#FF9500')">
+  <span class="vibe-emoji">🎲</span>
+  <span class="vibe-name">WILDCARD</span>
+  <span class="vibe-desc">Anything goes. Surprise us. Let's go.</span>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ========== CHALLENGE SCREEN ========== -->
+
+<div class="screen" id="challenge">
+  <div class="challenge-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <span class="vibe-pill" id="vibe-pill">LET'S GO</span>
+    <span class="challenge-count" id="challenge-count">#1</span>
+  </div>
+
+  <div class="challenge-main">
+    <p class="hype-message" id="hype-msg">🔥 The room is about to get LOUD!!</p>
+    <div class="challenge-card" id="challenge-card">
+      <span class="challenge-category-tag" id="cat-tag">PHYSICAL</span>
+      <span class="challenge-emoji-big" id="ch-emoji">🌮</span>
+      <h2 class="challenge-title" id="ch-title">TORTILLA SLAP</h2>
+      <p class="challenge-description" id="ch-desc">Fill your mouth with water. Play rock paper scissors. Winner slaps the loser with a tortilla. First to spit laughing LOSES! 😂</p>
+      <div class="warning-box" id="ch-warning">
+        <span class="warning-icon">⚠️</span>
+        <span id="warning-text">Keep it gentle! Play in a safe space. Not recommended for anyone with sensory sensitivities.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="challenge-actions">
+    <button class="btn-next" id="next-btn" onclick="nextChallenge()">NEXT CHALLENGE 🔥</button>
+    <button class="btn-home" onclick="goHome()">↩ Change the Vibe</button>
+  </div>
+</div>
+
+<!-- ========== CELEBRATION SCREEN ========== -->
+
+<div class="screen" id="celebration">
+  <div class="celebration-emoji">🎊</div>
+  <h2 class="celebration-title">YOU'RE ON FIRE!</h2>
+  <p class="celebration-sub">This group is absolutely UNHINGED 🔥</p>
+  <div class="celebration-count">
+    <div class="big-num" id="cel-count">5</div>
+    <div class="label">Challenges Crushed</div>
+  </div>
+  <p class="celebration-message">The energy in this room right now?? Absolutely unmatched. Keep going?? 👀</p>
+  <button class="btn-keep-going" onclick="keepGoing()">KEEP THE PARTY GOING 🎉</button>
+  <button class="btn-change-vibe" onclick="goHome()">↩ Change the Vibe</button>
+</div>
+
+<!-- Confetti container -->
+
+<div class="confetti-container" id="confetti"></div>
+
+<script>
+function startApp() {
+  showScreen('home');
+}
+
+// ============ DATA ============
+const challenges = {
+  'lets-go': [
+    { emoji: '🌮', title: 'TORTILLA SLAP', cat: 'PHYSICAL', desc: 'Fill your mouth with water. Play rock paper scissors. Winner slaps the loser with a soft tortilla. First to spit laughing LOSES! 😂', warning: 'Keep it gentle and use a soft tortilla. Play in a safe space. Not for anyone with sensory sensitivities.' },
+    { emoji: '🏃', title: 'FLOOR IS LAVA', cat: 'PHYSICAL', desc: 'Someone shouts "THE FLOOR IS LAVA!" and everyone has 5 seconds to get off the ground. Last person standing on the floor is OUT! 🌋', warning: 'Be careful of sharp furniture edges. Make sure the area is clear before playing.' },
+    { emoji: '👊', title: 'CLAP TRAP', cat: 'SPEED', desc: 'Leader shouts CLOSE or FAR and players must clap accordingly — fast! Wrong move or too slow? You\'re eliminated! Speed increases every round. ⚡', warning: 'Play at a comfortable pace. Anyone with hearing difficulties may need visual cues.' },
+    { emoji: '💨', title: 'WHISPER CHALLENGE', cat: 'REACTION', desc: 'Put on headphones with loud music. Your partner whispers a phrase. Try to lip-read and guess what they said. Prepare for absolute nonsense! 😂', warning: 'Keep volume at a safe level. Do not use headphones for extended periods.' },
+    { emoji: '👁️', title: 'OPEN EYE CHALLENGE', cat: 'SKILL', desc: 'Two players stare directly into each other\'s eyes. First person to blink, look away, or laugh is OUT! No touching, no funny faces... if you can resist! 👀', warning: 'If eyes become dry or uncomfortable, stop immediately.' },
+    { emoji: '📬', title: 'PASS THE PHONE', cat: 'SOCIAL', desc: 'Say "I\'m passing the phone to the person who..." and finish with a funny/true observation. That person takes the phone and does the same! Chain goes until everyone is roasted! 😂', warning: 'Keep it kind and fun! Avoid anything that could genuinely hurt feelings.' },
+  ],
+  'chill': [
+    { emoji: '🤥', title: 'TWO TRUTHS ONE LIE', cat: 'SOCIAL', desc: 'Each player shares 2 true things and 1 lie about themselves. The group votes on which one is the lie. You\'d be SHOCKED what comes out! 🤯', warning: 'Keep it appropriate for your group. Avoid sharing anything too personal that you\'re not comfortable with.' },
+    { emoji: '🧠', title: 'MIND MELD', cat: 'KNOWLEDGE', desc: 'Two players say a word at the same time. Then both try to say ONE word that connects the two. Keep going until you both say the SAME word. Telepathy test! 🔮', warning: 'No warnings needed — this one is safe for everyone!' },
+    { emoji: '💭', title: 'ROMAN EMPIRE', cat: 'SOCIAL', desc: 'Go around the group and ask everyone: "What\'s YOUR Roman Empire?" — the thing you randomly think about way more than you should. No judgment zone! 🏛️', warning: 'Keep it light and fun. This is a judgment-free zone!' },
+    { emoji: '🎯', title: 'MOST LIKELY TO', cat: 'SOCIAL', desc: 'Read a "Most Likely To..." prompt. On the count of 3, EVERYONE points at the person they think fits best. Most fingers pointed = you win... or lose! 😂', warning: 'Keep prompts positive and fun! Avoid anything that could be hurtful or embarrassing.' },
+    { emoji: '🔡', title: 'ALPHABET CHALLENGE', cat: 'KNOWLEDGE', desc: 'Pick a category — countries, foods, celebrity names, anything! Take turns naming something in that category starting with each letter A-Z. Stall and you\'re OUT! ⏱️', warning: 'No warnings needed — perfect for all ages!' },
+    { emoji: '🔮', title: "DON'T SAY THE SAME", cat: 'KNOWLEDGE', desc: 'Pick a category. On the count of 3, everyone shouts ONE word from that category at the SAME time. If you match someone else — you\'re both OUT! Last one standing wins! 🎯', warning: 'No warnings needed — great for all ages!' },
+  ],
+  'party': [
+    { emoji: '🎭', title: 'REVERSE CHARADES', cat: 'CREATIVE', desc: 'ONE person guesses. EVERYONE ELSE acts it out at the same time! Pure beautiful chaos. The whole team acts, one person guesses. Funniest group challenge ever! 😂', warning: 'Ensure there is enough space for everyone to move safely.' },
+    { emoji: '🕵️', title: 'IMPOSTER GAME', cat: 'SOCIAL', desc: 'Everyone gets the same secret word EXCEPT one imposter. Each person gives a one-word clue. The group must figure out who the imposter is before they bluff their way to victory! 🎯', warning: 'Use a fair word-sharing method so the imposter cannot see others\' screens.' },
+    { emoji: '🙋', title: 'YES OR NO LINE', cat: 'PHYSICAL', desc: 'Tape a line on the floor. One side = YES, other = NO. Questions are read aloud and EVERYONE jumps to their answer simultaneously. Wrong or slow? OUT! ⚡', warning: 'Ensure the floor is not slippery. Clear the area of obstacles before playing.' },
+    { emoji: '🤫', title: 'NEVER HAVE I EVER', cat: 'SOCIAL', desc: 'Hold up 10 fingers. Take turns saying "Never have I ever..." If you HAVE done it, put a finger down. First with no fingers up loses... or wins, depending on the stories! 😂', warning: 'Keep it age-appropriate for your group. Adults can choose their own level of spice!' },
+    { emoji: '🏆', title: 'MANNEQUIN CHALLENGE', cat: 'CREATIVE', desc: 'Everyone freezes in the most dramatic pose possible when the signal is given. One person films the scene. Most creative freeze wins! Share the video! 🎬', warning: 'Hold poses safely. Avoid awkward positions that could cause strain.' },
+    { emoji: '🎲', title: 'PEW PEW GAME', cat: 'SPEED', desc: 'Stand in a circle. Centre person points at someone who ducks — the two people either side must quickly point at each other and shout PEW PEW! Slowest is eliminated! 💥', warning: 'No physical contact required. Keep it fun and friendly!' },
+  ],
+  'just-us': [
+    { emoji: '🧠', title: 'HOW WELL DO YOU KNOW ME', cat: 'JUST US', desc: 'Take turns asking each other about favourites — colour, food, movie, childhood memory, dream holiday, most embarrassing moment. Keep score. Who REALLY knows who?? 🏆', warning: 'No warnings needed — pure wholesome fun for any two humans!' },
+    { emoji: '🤫', title: 'FINISH THE NAME', cat: 'JUST US', desc: 'One person says the FIRST name of a celebrity. The other must immediately finish the full name. No hesitation! The knowledge gaps between you will be HILARIOUS! 😂', warning: 'No warnings needed — great fun for any duo!' },
+    { emoji: '🔮', title: 'MIND MELD', cat: 'JUST US', desc: 'Say a random word at the same time. Then BOTH try to say one word that connects them. Keep going until you say the exact same word. True telepathy test! Are you actually in sync?? 🧩', warning: 'No warnings needed — find out if you\'re truly on the same wavelength!' },
+    { emoji: '💬', title: 'ONE WORD ONLY', cat: 'JUST US', desc: 'One player can ONLY respond with one single word to everything for 5 minutes. Ask questions, tell stories, react — they can only say ONE word back! Prepare for chaos! 😂', warning: 'No warnings needed — prepare for hilarious one-word answers!' },
+    { emoji: '🤭', title: 'LYING CHALLENGE', cat: 'JUST US', desc: 'Take turns telling stories — some true, some completely made up. The other has to guess: truth or total lie? Who has the better poker face?? 🎭', warning: 'Keep it lighthearted! No real secrets need to be revealed.' },
+    { emoji: '👆', title: 'MOST LIKELY TO — JUST US', cat: 'JUST US', desc: 'Take turns reading a "Most Likely To..." prompt about just the two of you. Both point at who they think fits — yourselves OR each other! Prepare for some OPINIONS! 😂', warning: 'Keep prompts fun and kind! This is about laughs not roasts.' },
+  ],
+  'lovebugs': [
+    { emoji: '🔤', title: 'ALPHABET HUNT', cat: 'KIDS', desc: 'Everyone runs around the room finding objects that start with each letter of the alphabet! A for Apple, B for Bag... who can find them all first? 🏆', warning: 'Supervise young children to ensure they do not run into furniture or each other.' },
+    { emoji: '🌋', title: 'FLOOR IS LAVA', cat: 'KIDS', desc: 'Shout "THE FLOOR IS LAVA!" and everyone has to get off the ground in 5 seconds! Use pillows, cushions, toys — anything! Last one on the floor is out! 🔥', warning: 'Always supervise children closely. Ensure furniture is safe to climb on. Clear sharp objects away first.' },
+    { emoji: '🐰', title: 'CHUBBY BUNNY', cat: 'KIDS', desc: 'Take turns putting ONE marshmallow in your mouth and saying "Chubby Bunny!" Keep going — who can say it with the most marshmallows? 😂', warning: '⚠️ CHOKING HAZARD: Adult supervision required at all times. Use mini marshmallows only. Not suitable for young children under 6.' },
+    { emoji: '🎭', title: 'ANIMAL CHARADES', cat: 'KIDS', desc: 'Pick an animal card (or whisper one to a player). Act out the animal without making any sounds! Can the group guess what animal you are? 🦁🐘🐧', warning: 'No warnings needed — wonderful for all ages!' },
+    { emoji: '👆', title: 'TOUCH MY BODY', cat: 'KIDS', desc: 'One player is blindfolded. Their partner gently guides their hand to touch a part of THEIR OWN body — nose, elbow, ear. Blindfolded player has to guess what body part! 😂', warning: 'Adult supervision recommended. Keep all contact appropriate and consensual.' },
+    { emoji: '🎵', title: 'FREEZE DANCE', cat: 'KIDS', desc: 'Put on a fun song and DANCE! When the music stops, FREEZE in whatever position you are in. Anyone who moves is out! Last dancer standing wins! 💃', warning: 'Ensure enough space for dancing. Remove breakable objects from the area.' },
+  ],
+  'wildcard': [
+    { emoji: '🎪', title: 'WILDCARD ROUND', cat: 'WILDCARD', desc: 'The universe decides! This round is a random mix of physical, social, knowledge and creative challenges. You have absolutely NO idea what\'s coming next. Ready for anything?? 🎲', warning: 'All challenges in Wildcard mode come with their own safety notes. Read each one carefully before playing!' },
+    { emoji: '🌮', title: 'TORTILLA SLAP', cat: 'PHYSICAL', desc: 'Fill your mouth with water. Play rock paper scissors. Winner slaps the loser with a soft tortilla. First to spit laughing LOSES! 😂', warning: 'Keep it gentle and use a soft tortilla. Play in a safe space.' },
+    { emoji: '🔮', title: 'MIND MELD', cat: 'KNOWLEDGE', desc: 'Two players say a word at the same time. Then both try to say ONE word that connects them. Keep going until you say the SAME word. Telepathy! 🧠', warning: 'No warnings needed — fun for everyone!' },
+    { emoji: '🎭', title: 'REVERSE CHARADES', cat: 'CREATIVE', desc: 'ONE person guesses while EVERYONE ELSE acts it out simultaneously. Pure chaos! 😂', warning: 'Ensure enough space for everyone to move safely.' },
+    { emoji: '🔡', title: 'ALPHABET CHALLENGE', cat: 'KNOWLEDGE', desc: 'Pick a category and name something starting with each letter A-Z. Stall and you\'re OUT! ⏱️', warning: 'No warnings needed — great for all!' },
+    { emoji: '👁️', title: 'STARE DOWN', cat: 'SKILL', desc: 'Two players stare into each other\'s eyes. First to blink, look away or laugh is OUT! 👀', warning: 'Stop if eyes become dry or uncomfortable.' },
+  ]
+};
+
+const hypeMessages = [
+  "🔥 The room is about to get LOUD!!",
+  "😂 This one's gonna break someone...",
+  "⚡ Ready?? Because HERE WE GO!!",
+  "🎉 Challenge accepted — let's GOOO!!",
+  "👀 Oh this one is gonna be GOOD...",
+  "🤣 Someone is NOT ready for this...",
+  "🌟 Another banger incoming!!",
+  "💥 The energy is UNREAL right now!!",
+  "🎯 Focus. Breathe. GO!!",
+  "😱 Oh WOW. Okay. Here we go!!",
+];
+
+const nextBtnTexts = [
+  "NEXT CHALLENGE 🔥",
+  "HIT ME AGAIN ⚡",
+  "DON'T STOP NOW 🎉",
+  "KEEP IT GOING 💥",
+  "MORE MORE MORE 🔥",
+  "LET'S GOOO 🚀",
+  "ONE MORE!! 😂",
+  "BRING IT ON 🎯",
+];
+
+// ============ STATE ============
+let currentVibe = '';
+let currentVibeLabel = '';
+let currentColor = '#FF2D55';
+let challengeIndex = 0;
+let totalChallenges = 0;
+let shuffledChallenges = [];
+
+// ============ FUNCTIONS ============
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+  });
+  const screen = document.getElementById(id);
+  screen.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function selectVibe(vibe, label, emoji, color) {
+  currentVibe = vibe;
+  currentVibeLabel = label;
+  currentColor = color;
+  challengeIndex = 0;
+  totalChallenges = 0;
+
+  // Shuffle challenges for this vibe
+  const pool = [...challenges[vibe]];
+  shuffledChallenges = pool.sort(() => Math.random() - 0.5);
+
+  // Update UI colors
+  document.documentElement.style.setProperty('--current-color', color);
+  document.getElementById('vibe-pill').textContent = emoji + ' ' + label;
+  document.getElementById('next-btn').style.background = color;
+
+  showScreen('challenge');
+  loadChallenge();
+}
+
+function loadChallenge() {
+  if (shuffledChallenges.length === 0) {
+    // Reshuffle when we run out
+    shuffledChallenges = [...challenges[currentVibe]].sort(() => Math.random() - 0.5);
+  }
+
+  const ch = shuffledChallenges.pop();
+
+  // Animate card out and in
+  const card = document.getElementById('challenge-card');
+  card.style.animation = 'none';
+  card.offsetHeight; // reflow
+  card.style.animation = 'cardIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+  document.getElementById('cat-tag').textContent = ch.cat;
+  document.getElementById('cat-tag').style.color = currentColor;
+  document.getElementById('ch-emoji').textContent = ch.emoji;
+  document.getElementById('ch-title').textContent = ch.title;
+  document.getElementById('ch-desc').textContent = ch.desc;
+  document.getElementById('warning-text').textContent = ch.warning;
+  document.getElementById('challenge-count').textContent = '#' + (totalChallenges + 1);
+
+  // Random hype message
+  const hype = hypeMessages[Math.floor(Math.random() * hypeMessages.length)];
+  document.getElementById('hype-msg').textContent = hype;
+  document.getElementById('hype-msg').style.animation = 'none';
+  document.getElementById('hype-msg').offsetHeight;
+  document.getElementById('hype-msg').style.animation = 'fadeIn 0.5s ease';
+
+  // Random next button text
+  const btnText = nextBtnTexts[Math.floor(Math.random() * nextBtnTexts.length)];
+  document.getElementById('next-btn').textContent = btnText;
+
+  totalChallenges++;
+}
+
+function nextChallenge() {
+  challengeIndex++;
+
+  // Every 5 challenges — show celebration
+  if (challengeIndex % 5 === 0) {
+    showCelebration();
+    return;
+  }
+
+  loadChallenge();
+}
+
+function showCelebration() {
+  document.getElementById('cel-count').textContent = totalChallenges;
+  showScreen('celebration');
+  launchConfetti();
+}
+
+function keepGoing() {
+  showScreen('challenge');
+  loadChallenge();
+}
+
+function goHome() {
+  showScreen('home');
+}
+
+function startApp() {
+  showScreen('home');
+}
+
+// ============ CONFETTI ============
+function launchConfetti() {
+  const container = document.getElementById('confetti');
+  container.innerHTML = '';
+  const colors = ['#FF2D55', '#FFE600', '#00FF87', '#7B61FF', '#FF9500', '#FF6B9D'];
+
+  for (let i = 0; i < 80; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (Math.random() * 10 + 6) + 'px';
+    piece.style.height = (Math.random() * 10 + 6) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    piece.style.animationDelay = Math.random() * 1.5 + 's';
+    container.appendChild(piece);
+  }
+
+  setTimeout(() => { container.innerHTML = ''; }, 5000);
+}
+</script>
+
+</body>
+</html>
